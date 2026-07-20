@@ -9,6 +9,8 @@ on:
 jobs:
   test:
     runs-on: ubuntu-latest
+    env:
+      BINARY_PATH: json2struct
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-go@v5
@@ -17,4 +19,4 @@ jobs:
       - name: Build
         run: go build -o json2struct ./cmd/json2struct/
       - name: Run tests
-        run: go test ./...
+        run: go test ./... -v

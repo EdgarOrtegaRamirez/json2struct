@@ -1,6 +1,7 @@
 package tests
 
 import (
+	"fmt"
 	"os"
 	"os/exec"
 	"strings"
@@ -12,17 +13,27 @@ var binaryPath string
 func init() {
 	// Try common paths in order
 	paths := []string{
-		"./json2struct",              // run from project root
-		"../json2struct/json2struct", // run from tests/ dir
+		os.Getenv("BINARY_PATH"),
+		"./json2struct",            // run from project root
+		"../../json2struct/json2struct", // run from tests/ dir (CI)
+		"../json2struct/json2struct",    // run from tests/ (nested)
+		"json2struct",           // relative to CWD
 	}
 	for _, p := range paths {
+		if p == "" {
+			continue
+		}
 		if _, err := os.Stat(p); err == nil {
 			binaryPath = p
 			return
 		}
 	}
-	// Fallback to hardcoded path (for CI)
-	binaryPath = "/root/workspace/json2struct/json2struct"
+	// Fallback: try to build first
+	fmt.Fprintln(os.Stderr, "Warning: binary not found, attempting to build")
+	cmd := exec.Command("go", "build", "-o", "json2struct", "./cmd/json2struct/")
+	if err := cmd.Run(); err == nil {
+		binaryPath = "json2struct"
+	}
 }
 
 func runCmd(stdin string, args ...string) ([]byte, error) {
