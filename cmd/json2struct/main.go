@@ -29,7 +29,7 @@ Examples:
   echo '{"name":"John","age":30}' | json2struct --name User --lang go
   json2struct --name User --lang python data.json
   json2struct --name User --lang typescript < data.json`,
-	Args:    cobra.MaximumNArgs(1),
+	Args: cobra.MaximumNArgs(1),
 	Run: func(cmd *cobra.Command, args []string) {
 		if len(args) == 0 {
 			data, err := io.ReadAll(os.Stdin)

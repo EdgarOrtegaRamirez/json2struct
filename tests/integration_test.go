@@ -12,7 +12,7 @@ var binaryPath string
 func init() {
 	// Try common paths in order
 	paths := []string{
-		"./json2struct",        // run from project root
+		"./json2struct",              // run from project root
 		"../json2struct/json2struct", // run from tests/ dir
 	}
 	for _, p := range paths {

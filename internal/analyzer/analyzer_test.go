@@ -150,9 +150,9 @@ func TestAnalyzeJSONArray(t *testing.T) {
 
 func TestFieldStruct(t *testing.T) {
 	f := Field{
-		Name:   "test",
-		Type:   TypeString,
-		Enum:   []string{"a", "b"},
+		Name:     "test",
+		Type:     TypeString,
+		Enum:     []string{"a", "b"},
 		Required: true,
 	}
 

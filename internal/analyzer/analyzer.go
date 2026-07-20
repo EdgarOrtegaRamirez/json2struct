@@ -16,10 +16,10 @@ const (
 
 // Field represents a single field in a JSON object
 type Field struct {
-	Name    string
-	Type    Type
-	SubType string // For arrays: the item type, or for objects: nested field types
-	Enum    []string
+	Name     string
+	Type     Type
+	SubType  string // For arrays: the item type, or for objects: nested field types
+	Enum     []string
 	Required bool
 }
 
